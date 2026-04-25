@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Playfair Display", "Fraunces", serif;
+    --font-body: "Plus Jakarta Sans", sans-serif;
+    --font-mono: "Geist Mono", monospace;
+    --radius: 0.625rem;
+
+    /* Light mode — white backgrounds, green primary */
+    --background: 0.99 0.005 142;
+    --foreground: 0.12 0.02 142;
+    --card: 0.98 0 0;
+    --card-foreground: 0.12 0.02 142;
+    --popover: 0.99 0 0;
+    --popover-foreground: 0.12 0.02 142;
+
+    /* Primary: agricultural green hsl(142 52% 36%) */
+    --primary: 0.42 0.13 142;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.94 0.06 142;
+    --secondary-foreground: 0.3 0.1 142;
+    --muted: 0.93 0.02 142;
+    --muted-foreground: 0.5 0.04 142;
+
+    --accent: 0.88 0.08 142;
+    --accent-foreground: 0.28 0.1 142;
+
+    --destructive: 0.57 0.22 29;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.88 0.04 142;
+    --input: 0.92 0.02 142;
+    --ring: 0.42 0.13 142;
+
+    --chart-1: 0.42 0.13 142;
+    --chart-2: 0.62 0.21 39;
+    --chart-3: 0.73 0.2 55;
+    --chart-4: 0.58 0.26 29;
+    --chart-5: 0.74 0.15 254;
+
+    /* Sidebar: dark hsl(150 25% 12%) */
+    --sidebar: 0.18 0.04 150;
+    --sidebar-foreground: 0.92 0.01 0;
+    --sidebar-primary: 0.68 0.17 142;
+    --sidebar-primary-foreground: 0.18 0.04 150;
+    --sidebar-accent: 0.26 0.06 150;
+    --sidebar-accent-foreground: 0.9 0.01 0;
+    --sidebar-border: 0.24 0.05 150;
+    --sidebar-ring: 0.68 0.17 142;
+
+    /* Severity */
+    --severity-low: 0.5 0.15 142;
+    --severity-moderate: 0.65 0.18 85;
+    --severity-high: 0.65 0.2 50;
+    --severity-critical: 0.55 0.25 29;
+  }
+
+  .dark {
+    --background: 0.14 0.03 150;
+    --foreground: 0.92 0.01 0;
+    --card: 0.19 0.04 150;
+    --card-foreground: 0.92 0.01 0;
+    --popover: 0.22 0.04 150;
+    --popover-foreground: 0.92 0.01 0;
+
+    --primary: 0.68 0.17 142;
+    --primary-foreground: 0.14 0.03 150;
+
+    --secondary: 0.26 0.05 150;
+    --secondary-foreground: 0.88 0.01 0;
+    --muted: 0.22 0.03 150;
+    --muted-foreground: 0.6 0.03 150;
+
+    --accent: 0.32 0.07 150;
+    --accent-foreground: 0.88 0.01 0;
+
+    --destructive: 0.65 0.22 29;
+    --destructive-foreground: 0.14 0.03 150;
+
+    --border: 0.28 0.05 150;
+    --input: 0.22 0.03 150;
+    --ring: 0.68 0.17 142;
+
+    --sidebar: 0.12 0.03 150;
+    --sidebar-foreground: 0.92 0.01 0;
+    --sidebar-primary: 0.68 0.17 142;
+    --sidebar-primary-foreground: 0.12 0.03 150;
+    --sidebar-accent: 0.24 0.06 150;
+    --sidebar-accent-foreground: 0.88 0.01 0;
+    --sidebar-border: 0.2 0.04 150;
+    --sidebar-ring: 0.68 0.17 142;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .transition-page {
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s
+      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Severity badge classes */
+  .badge-low {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300;
+  }
+  .badge-moderate {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300;
+  }
+  .badge-high {
+    @apply bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300;
+  }
+  .badge-critical {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300;
+  }
+
+  /* Order status classes */
+  .status-pending {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300;
+  }
+  .status-confirmed {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300;
+  }
+  .status-shipped {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300;
+  }
+  .status-delivered {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300;
+  }
+  .status-cancelled {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300;
+  }
+
+  /* Sidebar */
+  .sidebar-bg {
+    background-color: oklch(var(--sidebar));
+    color: oklch(var(--sidebar-foreground));
+  }
+
+  /* Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(var(--border)) transparent;
+  }
+}

@@ -1,0 +1,153 @@
+type UserId = text;
+type Timestamp = int;
+type Severity = 
+ variant {
+   critical;
+   high;
+   low;
+   moderate;
+ };
+type SeedBatch = 
+ record {
+   batch_number: text;
+   certified_date: int;
+   crop_category: CropCategory;
+   germination_rate: nat;
+   health_status: HealthStatus;
+   id: text;
+   manufacturer: text;
+   purity_percentage: nat;
+   quality_grade: QualityGrade;
+   seed_type: text;
+ };
+type QualityGrade = 
+ variant {
+   a;
+   aplus;
+   b;
+   c;
+   rejected;
+ };
+type PesticideCategory = 
+ variant {
+   biopesticide;
+   fungicide;
+   herbicide;
+   insecticide;
+   other;
+   rodenticide;
+ };
+type Pesticide = 
+ record {
+   active_ingredient: text;
+   brand: text;
+   category: PesticideCategory;
+   description: text;
+   id: text;
+   image_url: text;
+   is_available: bool;
+   name: text;
+   price: float64;
+   stock: nat;
+   suitable_for: vec text;
+   unit: text;
+ };
+type OrderStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   delivered;
+   pending;
+   shipped;
+ };
+type OrderItem = 
+ record {
+   name: text;
+   pesticide_id: text;
+   price: float64;
+   quantity: nat;
+   unit: text;
+ };
+type Order = 
+ record {
+   created_at: Timestamp;
+   delivery_address: text;
+   id: text;
+   items: vec OrderItem;
+   notes: text;
+   phone: text;
+   status: OrderStatus;
+   total_amount: float64;
+   user_id: UserId;
+ };
+type HealthStatus = 
+ variant {
+   certified;
+   contaminated;
+   treated;
+   untreated;
+ };
+type CropDiagnosis = 
+ record {
+   confidence: nat;
+   consult_expert: bool;
+   created_at: Timestamp;
+   crop_name: text;
+   disease_name: text;
+   fertilizer_recommendation: text;
+   id: text;
+   image_url: text;
+   notes: text;
+   pesticide_recommendation: text;
+   quality_status: text;
+   severity: Severity;
+   symptoms: vec text;
+   treatment: text;
+   user_id: UserId;
+ };
+type CropCategory = 
+ variant {
+   cereal;
+   fiber;
+   fruit;
+   oilseed;
+   other;
+   pulse;
+   spice;
+   vegetable;
+ };
+type CreateOrderInput = 
+ record {
+   delivery_address: text;
+   items: vec OrderItem;
+   notes: text;
+   phone: text;
+   total_amount: float64;
+ };
+type CreateDiagnosisInput = 
+ record {
+   confidence: nat;
+   consult_expert: bool;
+   crop_name: text;
+   disease_name: text;
+   fertilizer_recommendation: text;
+   image_url: text;
+   notes: text;
+   pesticide_recommendation: text;
+   quality_status: text;
+   severity: Severity;
+   symptoms: vec text;
+   treatment: text;
+ };
+service : {
+  createDiagnosis: (data: CreateDiagnosisInput) -> (CropDiagnosis);
+  createOrder: (data: CreateOrderInput) -> (Order);
+  deleteDiagnosis: (id: text) -> (bool);
+  getDiagnosis: (id: text) -> (opt CropDiagnosis) query;
+  getOrder: (id: text) -> (opt Order) query;
+  getPesticide: (id: text) -> (opt Pesticide) query;
+  getSeedBatch: (batch_number: text) -> (opt SeedBatch) query;
+  listDiagnosesByUser: () -> (vec CropDiagnosis) query;
+  listOrdersByUser: () -> (vec Order) query;
+  listPesticides: () -> (vec Pesticide) query;
+}

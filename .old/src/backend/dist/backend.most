@@ -1,0 +1,112 @@
+// Version: 1.0.0
+type CropCategory__421194967 =
+  {#cereal; #fiber; #fruit; #oilseed; #other; #pulse; #spice; #vegetable};
+type CropDiagnosis__166175786 =
+  {
+    confidence : Nat;
+    consult_expert : Bool;
+    created_at : Timestamp__301639476;
+    crop_name : Text;
+    disease_name : Text;
+    fertilizer_recommendation : Text;
+    id : Text;
+    image_url : Text;
+    notes : Text;
+    pesticide_recommendation : Text;
+    quality_status : Text;
+    severity : Severity__582687783;
+    symptoms : [Text];
+    treatment : Text;
+    user_id : UserId__158757552
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type HealthStatus__954648249 =
+  {#certified; #contaminated; #treated; #untreated};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OrderItem__970180480 =
+  {
+    name : Text;
+    pesticide_id : Text;
+    price : Float;
+    quantity : Nat;
+    unit : Text
+  };
+type OrderStatus__591380551 =
+  {#cancelled; #confirmed; #delivered; #pending; #shipped};
+type Order__720360493 =
+  {
+    created_at : Timestamp__301639476;
+    delivery_address : Text;
+    id : Text;
+    items : [OrderItem__970180480];
+    notes : Text;
+    phone : Text;
+    status : OrderStatus__591380551;
+    total_amount : Float;
+    user_id : UserId__158757552
+  };
+type PesticideCategory__818260435 =
+  {#biopesticide; #fungicide; #herbicide; #insecticide; #other; #rodenticide};
+type Pesticide__134171354 =
+  {
+    active_ingredient : Text;
+    brand : Text;
+    category : PesticideCategory__818260435;
+    description : Text;
+    id : Text;
+    image_url : Text;
+    is_available : Bool;
+    name : Text;
+    price : Float;
+    stock : Nat;
+    suitable_for : [Text];
+    unit : Text
+  };
+type QualityGrade__569304308 = {#a; #aplus; #b; #c; #rejected};
+type SeedBatch__156720653 =
+  {
+    batch_number : Text;
+    certified_date : Int;
+    crop_category : CropCategory__421194967;
+    germination_rate : Nat;
+    health_status : HealthStatus__954648249;
+    id : Text;
+    manufacturer : Text;
+    purity_percentage : Nat;
+    quality_grade : QualityGrade__569304308;
+    seed_type : Text
+  };
+type Severity__582687783 = {#critical; #high; #low; #moderate};
+type Timestamp__301639476 = Int;
+type UserId__158757552 = Text;
+actor {
+  stable diagnoses :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?CropDiagnosis__166175786]];
+      var elementIndex : Nat__490723111
+    };
+  stable orders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Order__720360493]];
+      var elementIndex : Nat__490723111
+    };
+  stable pesticides :
+    {
+      var root : Node__46230540<Text, Pesticide__134171354>;
+      var size : Nat__490723111
+    };
+  stable seeds :
+    {
+      var root : Node__46230540<Text, SeedBatch__156720653>;
+      var size : Nat__490723111
+    }
+};

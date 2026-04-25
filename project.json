@@ -1,0 +1,23 @@
+{
+  "overview": "AgriShield AI is a smart crop health platform for farmers and agronomists. Diagnose crop diseases by uploading images, manage pesticide purchases and seed batch verification, track orders, and get weather insights — all with offline support and multi-language access.",
+  "features": [
+    "AI-powered crop disease diagnosis with image upload",
+    "Pesticide shop with cart and order management",
+    "Seed batch verification by batch number",
+    "Weather insights with geolocation",
+    "Diagnosis history with filter and sort",
+    "Offline-first with background sync",
+    "4-language support (English, Hindi, Tamil, Telugu)",
+    "Mobile-responsive with animated navigation"
+  ],
+  "category": "agriculture",
+  "tags": [
+    "agriculture",
+    "crop-health",
+    "disease-detection",
+    "offline-first",
+    "i18n",
+    "internet-computer"
+  ],
+  "last_updated": "2026-04-25T05:42:46.510Z"
+}
